@@ -59,3 +59,9 @@ describe('Auth Routes - Signup', () => {
     expect(res.body).toHaveProperty('error'); // "User already exists" or similar
   });
 });
+
+const mongoose = require('mongoose');
+
+afterAll(async () => {
+  await mongoose.connection.close();
+});
