@@ -5,19 +5,21 @@ const app = require('../../server'); // relative path to server.js
 
 describe('Auth Routes - Signup', () => {
   it('should signup a new user successfully', async () => {
+    const uniqueUsername = `manas${Date.now()}`;
+    const uniqueEmail = `manas${Date.now()}@gmail.com`;
     const res = await request(app)
       .post('/api/auth/signup')
       .send({
         name: "Manas Mankar",
-        username: "manas",
-        email: "manas121@gmail.com",
+        username: uniqueUsername,
+        email: uniqueEmail,
         password: "Manas221"
       });
     expect(res.statusCode).toBe(201);
     expect(res.body).toHaveProperty('id');
     expect(res.body).toHaveProperty('name', 'Manas Mankar');
-    expect(res.body).toHaveProperty('username', 'manas');
-    expect(res.body).toHaveProperty('email', 'manas121@gmail.com');
+    expect(res.body).toHaveProperty('username', uniqueUsername);
+    expect(res.body).toHaveProperty('email', uniqueEmail);
   });
 
   it('should not allow signup with missing fields', async () => {
